@@ -1,10 +1,13 @@
 .session-page {
   min-height: 100vh;
   background: #0a0a0a;
-  color: #fff;
-  padding: 60px 40px;
+  color:  #f5f5f5;
+  padding: 120px 40px 60px; /* space for navbar */
   text-align: center;
+  overflow: hidden;
+  position: relative;
 }
+
 
 .session-id {
   opacity: 0.6;

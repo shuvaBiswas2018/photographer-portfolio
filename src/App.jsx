@@ -14,7 +14,7 @@ import SessionCreator from "./pages/SessionCreator";
 function App() {
   return (
     <>
-      <Navbar />
+      <Navbar /> {/* ✅ ALWAYS visible */}
 
       <Routes>
         <Route path="/" element={<Home />} />

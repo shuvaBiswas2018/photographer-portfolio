@@ -49,3 +49,7 @@ html {
 section {
   scroll-margin-top: 80px; /* match navbar height */
 }
+
+.session-page {
+  padding-top: 120px; /* navbar height + spacing */
+}

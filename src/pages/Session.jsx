@@ -18,7 +18,7 @@ export default function Session() {
 
   useEffect(() => {
     fetchPhotos();
-    const interval = setInterval(fetchPhotos, 15000);
+    const interval = setInterval(fetchPhotos, 1000000);
     return () => clearInterval(interval);
   }, []);
 
@@ -32,7 +32,24 @@ export default function Session() {
   };
 
   return (
+    
     <div className="session-page">
+      <nav className="navbar">
+      <div className="navbar-name">Elena Voss</div>
+
+      <div className="navbar-links">
+        <a href="/home" className="nav-link">Home</a>
+        <a href="/work" className="nav-link">Work</a>
+        <a href="/about" className="nav-link">About</a>
+        <a href="/pricing" className="nav-link">Pricing</a>
+        <a href="/contact" className="nav-link">Contact</a>
+      </div>
+    </nav>
+      <div className="gallery-label">
+        <span />
+        <span>Live Session</span>
+        <span />
+      </div>
       <h1>Live Session</h1>
       <p className="session-id">Session ID: {token}</p>
 
