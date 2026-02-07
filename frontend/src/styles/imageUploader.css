@@ -1,0 +1,31 @@
+.image-uploader {
+  margin-top: 40px;
+}
+
+.file-list {
+  margin-top: 20px;
+}
+
+.file-name {
+  font-size: 12px;
+  padding: 6px 0;
+  color: #a3a3a3;
+  border-bottom: 1px dashed #262626;
+}
+
+
+.upload-btn {
+  margin-top: 12px;
+  padding: 10px 18px;
+  background: #c9a962;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.uploading {
+  color: #c9a962;
+  font-size: 12px;
+  margin-top: 8px;
+}

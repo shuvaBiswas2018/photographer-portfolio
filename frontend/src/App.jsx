@@ -9,6 +9,7 @@ import Pricing from "./components/Pricing";
 import Contact from "./components/Contact";
 import Session from "./pages/Session";
 import SessionCreator from "./pages/SessionCreator";
+// import LiveSession from "./pages/LiveSession";
 
 
 function App() {
