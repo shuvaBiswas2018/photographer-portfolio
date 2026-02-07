@@ -21,7 +21,41 @@
   z-index: 0;
 }
 
-/* Container */
+/* ===============================
+   CENTERED LABEL
+================================ */
+
+.about-label-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 64px;
+  position: relative;
+  z-index: 1;
+}
+
+.about-label {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.about-label .label-line {
+  width: 64px;
+  height: 1px;
+  background-color: rgba(201, 169, 98, 0.7);
+}
+
+.about-label .label-text {
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #c9a962;
+}
+
+/* ===============================
+   CONTAINER
+================================ */
+
 .about-container {
   max-width: 1024px;
   margin: 0 auto;
@@ -51,7 +85,6 @@
   overflow: hidden;
 }
 
-/* Icon */
 .about-card-icon {
   position: absolute;
   inset: 0;
@@ -64,14 +97,8 @@
   width: 120px;
   height: 120px;
   opacity: 0.15;
-  transition: transform 0.7s ease;
 }
 
-.about-card:hover .about-card-icon svg {
-  transform: scale(1.05);
-}
-
-/* Decorative frame */
 .about-card-frame {
   position: absolute;
   inset: 24px;
@@ -79,7 +106,6 @@
   pointer-events: none;
 }
 
-/* Soft glow */
 .about-card-glow {
   position: absolute;
   inset: 0;
@@ -95,35 +121,13 @@
   color: #f5f5f5;
 }
 
-.about-label {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 32px;
-}
-
-.about-label span:first-child {
-  width: 48px;
-  height: 1px;
-  background-color: #c9a962;
-}
-
-.about-label span:last-child {
-  font-size: 11px;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: #c9a962;
-}
-
-/* Title */
 .about-title {
   font-family: "Playfair Display", serif;
-  font-size: clamp(2.5rem, 4vw, 3rem);
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
   line-height: 1.2;
   margin-bottom: 32px;
 }
 
-/* Text */
 .about-text {
   font-size: 18px;
   line-height: 1.7;
@@ -160,4 +164,79 @@
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: #737373;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 640px) {
+  .about-section {
+    padding: 96px 20px;
+  }
+
+  .about-label-wrapper {
+    margin-bottom: 48px;
+  }
+
+  .about-label {
+    gap: 16px;
+  }
+
+  .about-label .label-line {
+    width: 40px;
+  }
+
+  .about-container {
+    gap: 48px;
+  }
+
+  .about-card {
+    aspect-ratio: 3 / 4;
+  }
+
+  .about-card-icon svg {
+    width: 90px;
+    height: 90px;
+  }
+
+  .about-card-frame {
+    inset: 16px;
+  }
+
+  .about-title {
+    font-size: 2rem;
+  }
+
+  .about-text {
+    font-size: 16px;
+  }
+
+  .about-subtext {
+    font-size: 15px;
+  }
+
+  
+  .about-stats {
+    flex-direction: column;
+    align-items: center;      /* ✅ center items horizontally */
+    text-align: center;       /* ✅ center text */
+    gap: 24px;
+  }
+
+
+
+  .about-stats h3 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .about-stats {
+    gap: 32px;
+  }
+
+  .about-stats h3 {
+    font-size: 32px;
+  }
 }

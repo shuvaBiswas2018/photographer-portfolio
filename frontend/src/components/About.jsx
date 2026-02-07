@@ -3,12 +3,22 @@ import "../styles/about.css";
 export default function About() {
   return (
     <section id="about" className="about-section">
-      {/* Background decoration */}
+      {/* Background glow */}
       <div className="about-bg-glow" />
 
+      {/* Centered ABOUT label */}
+      <div className="about-label-wrapper">
+        <div className="about-label">
+          <span className="label-line" />
+          <span className="label-text">About</span>
+          <span className="label-line" />
+        </div>
+      </div>
+
+      {/* Main content */}
       <div className="about-container">
-        {/* Image / Card */}
-        <div className="about-card group">
+        {/* Card */}
+        <div className="about-card">
           <div className="about-card-icon">
             <svg
               viewBox="0 0 24 24"
@@ -21,28 +31,19 @@ export default function About() {
             </svg>
           </div>
 
-          {/* Decorative frame */}
           <div className="about-card-frame" />
           <div className="about-card-glow" />
         </div>
 
-        {/* Content */}
+        {/* Text content */}
         <div className="about-content">
-          <div className="about-label">
-            <span />
-            <span>About</span>
-          </div>
-
-          <h2 className="about-title">
-            The Story Behind the Lens
-          </h2>
+          <h2 className="about-title">The Story Behind the Lens</h2>
 
           <p className="about-text">
             With over a decade of experience capturing life&apos;s most precious
             moments, I believe every photograph tells a story waiting to be
             discovered. My approach blends documentary authenticity with
-            artistic vision, creating images that resonate on an emotional
-            level.
+            artistic vision, creating images that resonate emotionally.
           </p>
 
           <p className="about-subtext">
@@ -50,7 +51,6 @@ export default function About() {
             and commissions.
           </p>
 
-          {/* Stats */}
           <div className="about-stats">
             <div>
               <h3>500+</h3>
