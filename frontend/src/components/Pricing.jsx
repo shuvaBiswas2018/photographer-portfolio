@@ -97,9 +97,8 @@ export default function Pricing() {
           {pricingData.map((item, index) => (
             <div
               key={index}
-              className={`pricing-card-wrapper ${
-                item.featured ? "featured" : ""
-              }`}
+              className={`pricing-card-wrapper ${item.featured ? "featured" : ""
+                }`}
             >
               <div className="pricing-card">
                 {item.featured && <div className="badge">Popular</div>}

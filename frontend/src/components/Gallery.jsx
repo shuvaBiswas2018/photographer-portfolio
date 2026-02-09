@@ -1,13 +1,39 @@
 import "../styles/gallery.css";
 
 const galleryItems = [
-  { title: "Portrait Series", year: "2024", size: "portrait" },
-  { title: "Landscapes", year: "2023", size: "square" },
-  { title: "Architecture", year: "2024", size: "portrait" },
-  { title: "Editorial Work", year: "Featured Project • 2024", size: "wide" },
-  { title: "Weddings", year: "2023–2024", size: "tall" },
-  { title: "Time & Motion", year: "Experimental Series", size: "wideTall" }
+  {
+    title: "Traditional Portraits",
+    year: "Indian Culture • 2024",
+    size: "portrait"
+  },
+  {
+    title: "Indian Landscapes",
+    year: "Across Bharat • 2023",
+    size: "square"
+  },
+  {
+    title: "Heritage & Architecture",
+    year: "Temples & Monuments • 2024",
+    size: "portrait"
+  },
+  {
+    title: "Editorial & Fashion",
+    year: "Featured Project • 2024",
+    size: "wide",
+    image: "/images/editorial-work.jpg"
+  },
+  {
+    title: "Indian Weddings",
+    year: "Candid & Rituals • 2023–2024",
+    size: "tall"
+  },
+  {
+    title: "Street Life of India",
+    year: "Everyday Stories",
+    size: "wideTall"
+  }
 ];
+
 
 export default function Gallery() {
   return (
@@ -39,6 +65,11 @@ export default function Gallery() {
             <div
               key={index}
               className={`gallery-item ${item.size} animate-fade-in animate-delay-${index + 1}`}
+              style={
+                item.image
+                  ? { backgroundImage: `url(${item.image})` }
+                  : {}
+              }
             >
               {/* Icon placeholder */}
               <div className="gallery-icon" />

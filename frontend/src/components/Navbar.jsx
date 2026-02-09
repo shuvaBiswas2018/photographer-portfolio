@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import "../styles/navbar.css";
+import logo from "/images/logo.png";
 
 export default function Navbar() {
   const location = useLocation();
@@ -13,7 +14,18 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      <div className="navbar-name">Elena Voss</div>
+      {/* Brand / Logo */}
+      <Link
+        to="/home"
+        className="navbar-brand"
+        onClick={() => setOpen(false)}
+      >
+        <img src={logo} alt="Shaajora Logo" className="navbar-logo" />
+        <div className="brand-text">
+          <span className="brand-name">SHAAJORA</span>
+          <span className="brand-tagline">Where Tradition Meets Art</span>
+        </div>
+      </Link>
 
       {/* Hamburger */}
       <div
@@ -25,12 +37,23 @@ export default function Navbar() {
         <span></span>
       </div>
 
+      {/* Navigation Links */}
       <div className={`navbar-links ${open ? "open" : ""}`}>
-        <a href="/home" className="nav-link" onClick={() => setOpen(false)}>Home</a>
-        <a href="/work" className="nav-link" onClick={() => setOpen(false)}>Work</a>
-        <a href="/about" className="nav-link" onClick={() => setOpen(false)}>About</a>
-        <a href="/pricing" className="nav-link" onClick={() => setOpen(false)}>Pricing</a>
-        <a href="/contact" className="nav-link" onClick={() => setOpen(false)}>Contact</a>
+        <Link to="/home" className="nav-link" onClick={() => setOpen(false)}>
+          Home
+        </Link>
+        <Link to="/work" className="nav-link" onClick={() => setOpen(false)}>
+          Work
+        </Link>
+        <Link to="/about" className="nav-link" onClick={() => setOpen(false)}>
+          About
+        </Link>
+        <Link to="/pricing" className="nav-link" onClick={() => setOpen(false)}>
+          Pricing
+        </Link>
+        <Link to="/contact" className="nav-link" onClick={() => setOpen(false)}>
+          Contact
+        </Link>
       </div>
     </nav>
   );
