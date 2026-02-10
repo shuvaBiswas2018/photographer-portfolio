@@ -12,24 +12,33 @@ export default function SessionCreator() {
   });
 
   const [sessionToken, setSessionToken] = useState(null);
+  const [shortId, setShortId] = useState(null);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const createSession = async () => {
-    const res = await fetch("http://localhost:8000/api/session/create", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form)
-    });
+    try {
+      const res = await fetch("http://localhost:8000/api/session/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form)
+      });
 
-    const data = await res.json();
-    setSessionToken(data.sessionToken);
+      const data = await res.json();
+
+      // 🔑 Backend returns these two
+      setSessionToken(data.sessionToken);
+      setShortId(data.shortId);
+    } catch (err) {
+      console.error("Failed to create session", err);
+    }
   };
 
-  const sessionUrl = sessionToken
-    ? `${window.location.origin}/session/${sessionToken}`
+  // ✅ SHORT & CLEAN URL
+  const sessionUrl = shortId
+    ? `${window.location.origin}/session/${shortId}`
     : "";
 
   return (
@@ -37,22 +46,36 @@ export default function SessionCreator() {
       <h1>Create Live Session</h1>
 
       <div className="session-form">
-        <input name="sessionName" placeholder="Session Name" onChange={handleChange} />
-        <input name="clientName" placeholder="Client Name" onChange={handleChange} />
-        <input name="eventName" placeholder="Event Name" onChange={handleChange} />
+        <input
+          name="sessionName"
+          placeholder="Session Name"
+          onChange={handleChange}
+        />
+
+        <input
+          name="clientName"
+          placeholder="Client Name"
+          onChange={handleChange}
+        />
+
+        <input
+          name="eventName"
+          placeholder="Event Name"
+          onChange={handleChange}
+        />
 
         <select name="eventType" onChange={handleChange}>
           <option value="">Select Event Type</option>
-          <option>Wedding</option>
-          <option>Birthday</option>
-          <option>Pre-Wedding</option>
-          <option>Corporate</option>
+          <option value="Wedding">Wedding</option>
+          <option value="Birthday">Birthday</option>
+          <option value="Pre-Wedding">Pre-Wedding</option>
+          <option value="Corporate">Corporate</option>
         </select>
 
         <button onClick={createSession}>Start Session</button>
       </div>
 
-      {sessionToken && (
+      {shortId && (
         <>
           <p className="creator-subtitle">
             Share this QR code with your client
@@ -70,7 +93,8 @@ export default function SessionCreator() {
 
           <p className="creator-url">{sessionUrl}</p>
 
-          <ImageUploader sessionToken={sessionToken} />
+          {/* Image upload still uses sessionToken */}
+          <ImageUploader shortId={shortId} />
         </>
       )}
     </div>

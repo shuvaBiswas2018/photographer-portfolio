@@ -29,3 +29,45 @@
   font-size: 12px;
   margin-top: 8px;
 }
+
+
+.image-uploader {
+  margin-top: 40px;
+  padding: 24px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  text-align: center;
+}
+
+.uploader-title {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.uploader-instructions {
+  font-size: 14px;
+  opacity: 0.75;
+  margin-bottom: 16px;
+}
+
+.upload-btn {
+  margin-top: 12px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: none;
+  background: #c9a962;
+  color: #0a0a0a;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.upload-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.upload-success {
+  margin-top: 14px;
+  color: #9be38f;
+  font-size: 14px;
+}

@@ -1,75 +1,71 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../styles/session.css";
+import logo from "/images/logo.png";
+import Navbar from "../components/Navbar";
 
-const FOLDER_ID = "1kB5QUa5g-aSNymQkOswzvJDZW722yOb9";
-const API_KEY = import.meta.env.VITE_GOOGLE_DRIVE_API_KEY;
 
 export default function Session() {
-  const { token } = useParams();
+  const { token } = useParams(); // token = shortId
   const [photos, setPhotos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchPhotos = async () => {
-    const url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType+contains+'image/'&fields=files(id,name,thumbnailLink)&key=${API_KEY}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    setPhotos(data.files || []);
+    try {
+      const res = await fetch(
+        `http://localhost:8000/api/session/photos/${token}`
+      );
+      const data = await res.json();
+      setPhotos(data);
+    } catch (err) {
+      console.error("Failed to load photos", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     fetchPhotos();
-    const interval = setInterval(fetchPhotos, 1000000);
+    const interval = setInterval(fetchPhotos, 5000);
     return () => clearInterval(interval);
   }, []);
 
-  const downloadImage = (id, name) => {
-    const link = document.createElement("a");
-    link.href = `https://drive.google.com/uc?export=download&id=${id}`;
-    link.download = name;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   return (
-    
-    <div className="session-page">
-      <nav className="navbar">
-      <div className="navbar-name">Elena Voss</div>
+  <>
+    <Navbar />
 
-      <div className="navbar-links">
-        <a href="/home" className="nav-link">Home</a>
-        <a href="/work" className="nav-link">Work</a>
-        <a href="/about" className="nav-link">About</a>
-        <a href="/pricing" className="nav-link">Pricing</a>
-        <a href="/contact" className="nav-link">Contact</a>
-      </div>
-    </nav>
+    <div className="session-page">
+      {/* LABEL */}
       <div className="gallery-label">
         <span />
         <span>Live Session</span>
         <span />
       </div>
+
       <h1>Live Session</h1>
       <p className="session-id">Session ID: {token}</p>
 
-      <div className="photo-grid">
-        {photos.map((p) => (
-          <div className="photo-card" key={p.id}>
-            <img
-              src={p.thumbnailLink?.replace("=s220", "=s1200")}
-              alt={p.name}
-            />
+      {loading && <p>Loading photos...</p>}
 
-            <button
-              className="download-btn"
-              onClick={() => downloadImage(p.id, p.name)}
-            >
-              ⬇ Download
-            </button>
+      <div className="photo-grid">
+        {photos.map((photo, index) => (
+          <div className="photo-card" key={index}>
+            <div className="photo-wrapper">
+              <img src={photo.url} alt="Session" />
+
+              <a
+                href={`http://localhost:8000/api/session/download?key=${encodeURIComponent(
+                  photo.key
+                )}`}
+                className="download-btn"
+              >
+                ⬇ Download
+              </a>
+            </div>
           </div>
         ))}
       </div>
     </div>
-  );
+  </>
+);
 }

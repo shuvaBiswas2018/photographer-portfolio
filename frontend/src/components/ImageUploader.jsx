@@ -1,50 +1,80 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "../styles/imageUploader.css";
 
-export default function ImageUploader({ sessionToken }) {
-  const [selectedFile, setSelectedFile] = useState(null);
+export default function ImageUploader({ shortId }) {
   const [files, setFiles] = useState([]);
+  const [uploading, setUploading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const fileInputRef = useRef(null);
 
-  const uploadImage = async () => {
-    if (!selectedFile) return alert("Please choose a file");
+  const handleFileChange = (e) => {
+    setFiles(e.target.files);
+    setSuccess(false);
+  };
+
+  const uploadImages = async () => {
+    if (!files.length) return;
 
     const formData = new FormData();
-    formData.append("file", selectedFile);
+    formData.append("shortId", shortId);
 
-    const res = await fetch(
-      `http://localhost:8000/api/session/${sessionToken}/upload`,
-      {
+    for (let i = 0; i < files.length; i++) {
+      formData.append("files", files[i]);
+    }
+
+    setUploading(true);
+
+    try {
+      const res = await fetch("http://localhost:8000/api/upload/photos", {
         method: "POST",
         body: formData
-      }
-    );
+      });
 
-    const data = await res.json();
-    setFiles((prev) => [...prev, data.filename]);
-    setSelectedFile(null);
+      if (!res.ok) throw new Error("Upload failed");
+
+      // ✅ Clear after success
+      setFiles([]);
+      fileInputRef.current.value = "";
+      setSuccess(true);
+    } catch (err) {
+      console.error("Upload error", err);
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
     <div className="image-uploader">
-      <h3>Upload Event Photos</h3>
+      {/* 🔹 Heading */}
+      <h2 className="uploader-title">Upload Event Photos</h2>
+
+      {/* 🔹 Instructions */}
+      <p className="uploader-instructions">
+        Select one or more photos from the event and upload them to make them
+        instantly available in the live session gallery.
+      </p>
 
       <input
+        ref={fileInputRef}
         type="file"
+        multiple
         accept="image/*"
-        onChange={(e) => setSelectedFile(e.target.files[0])}
+        onChange={handleFileChange}
       />
 
-      <button className="upload-btn" onClick={uploadImage}>
-        Upload Photo
+      <button
+        className="upload-btn"
+        onClick={uploadImages}
+        disabled={uploading || !files.length}
+      >
+        {uploading ? "Uploading..." : "Upload Photos"}
       </button>
 
-      <div className="file-list">
-        {files.map((file, index) => (
-          <div key={index} className="file-name">
-            {file}
-          </div>
-        ))}
-      </div>
+      {success && (
+        <p className="upload-success">
+          ✅ Photos uploaded successfully
+        </p>
+      )}
     </div>
   );
 }

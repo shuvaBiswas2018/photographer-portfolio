@@ -7,11 +7,6 @@ export default function Navbar() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
 
-  // 🔒 Hide navbar on session pages
-  if (location.pathname.startsWith("/session")) {
-    return null;
-  }
-
   return (
     <nav className="navbar">
       {/* Brand / Logo */}
