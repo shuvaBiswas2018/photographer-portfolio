@@ -1,0 +1,217 @@
+/* ===============================
+   PRICING SECTION
+================================ */
+
+.pricing-section {
+  position: relative;
+  padding: 128px 24px;
+  background-color: #0a0a0a;
+  overflow: hidden;
+}
+
+/* Background dots */
+.pricing-bg-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  background-image: radial-gradient(
+    circle at 2px 2px,
+    #c9a962 1px,
+    transparent 1px
+  );
+  background-size: 40px 40px;
+  z-index: 0;
+}
+
+/* Container */
+.pricing-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===============================
+   HEADER
+================================ */
+
+.pricing-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.pricing-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.pricing-label span:first-child,
+.pricing-label span:last-child {
+  width: 48px;
+  height: 1px;
+  background-color: #c9a962;
+}
+
+.pricing-label span:nth-child(2) {
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #c9a962;
+}
+
+.pricing-header h2 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  color: #f5f5f5;
+  margin-bottom: 16px;
+}
+
+.pricing-header p {
+  color: #737373;
+  font-size: 18px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ===============================
+   GRID
+================================ */
+
+.pricing-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* ===============================
+   CARD
+================================ */
+
+.pricing-card-wrapper {
+  position: relative;
+}
+
+.pricing-card-wrapper.featured::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  background: linear-gradient(135deg, #c9a962, transparent);
+  opacity: 0.3;
+  filter: blur(20px);
+}
+
+.pricing-card {
+  position: relative;
+  padding: 24px;
+  background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+  border: 1px solid #262626;
+  transition: transform 0.5s ease;
+}
+
+.pricing-card:hover {
+  transform: scale(1.05);
+}
+
+.pricing-card h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  color: #f5f5f5;
+  text-align: center;
+}
+
+.pricing-card .subtitle {
+  display: block;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: #737373;
+  margin-bottom: 20px;
+}
+
+/* Price box */
+.price-box {
+  text-align: center;
+  padding: 16px 0;
+  border-top: 1px solid #262626;
+  border-bottom: 1px solid #262626;
+  margin-bottom: 20px;
+}
+
+.price {
+  font-family: "Playfair Display", serif;
+  font-size: 32px;
+  color: #c9a962;
+}
+
+.price-note {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #737373;
+  margin-top: 6px;
+}
+
+/* Features */
+.pricing-card ul {
+  margin-bottom: 24px;
+}
+
+.pricing-card li {
+  font-size: 12px;
+  color: #a3a3a3;
+  margin-bottom: 8px;
+}
+
+/* Button */
+.pricing-btn {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #c9a962;
+  color: #c9a962;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.pricing-btn:hover {
+  background-color: #c9a962;
+  color: #0a0a0a;
+}
+
+/* Featured badge */
+.badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #c9a962;
+  color: #0a0a0a;
+  font-size: 10px;
+  padding: 4px 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ===============================
+   FOOTER TEXT
+================================ */
+
+.pricing-footer {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid #1a1a1a;
+  text-align: center;
+}
+
+.pricing-footer p {
+  font-size: 14px;
+  color: #737373;
+  max-width: 600px;
+  margin: 0 auto;
+}
