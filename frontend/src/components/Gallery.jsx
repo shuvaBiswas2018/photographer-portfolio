@@ -4,35 +4,42 @@ const galleryItems = [
   {
     title: "Traditional Portraits",
     year: "Indian Culture • 2024",
-    size: "portrait"
+    size: "portrait",
+    image: "/images/gallery/portrait01.jpg"
   },
   {
     title: "Indian Landscapes",
     year: "Across Bharat • 2023",
-    size: "square"
+    size: "square",
+    image: "/images/gallery/landscape01.jpg"
   },
   {
     title: "Heritage & Architecture",
     year: "Temples & Monuments • 2024",
-    size: "portrait"
+    size: "portrait",
+    image: "/images/gallery/portrait02.jpg"
   },
   {
     title: "Editorial & Fashion",
     year: "Featured Project • 2024",
     size: "wide",
-    image: "/images/editorial-work.jpg"
+    image: "/images/gallery/editorial01.jpg"
   },
   {
     title: "Indian Weddings",
     year: "Candid & Rituals • 2023–2024",
-    size: "tall"
+    size: "tall",
+    image: "/images/gallery/wedding01.jpg"
   },
   {
     title: "Street Life of India",
     year: "Everyday Stories",
-    size: "wideTall"
+    size: "wideTall",
+    image: "/images/gallery/street01.jpg"
   }
 ];
+
+
 
 
 export default function Gallery() {

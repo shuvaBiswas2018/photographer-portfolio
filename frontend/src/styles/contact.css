@@ -12,22 +12,21 @@
 /* Background glow */
 .contact-bg-glow {
   position: absolute;
-  top: 50%;
-  left: 0;
-  width: 380px;
-  height: 380px;
-  transform: translateY(-50%);
+  inset: 0 auto 0 -120px;
+  width: 420px;
+  height: 420px;
+  margin: auto 0;
   opacity: 0.05;
   background: radial-gradient(circle, #c9a962 0%, transparent 70%);
+  pointer-events: none;
 }
 
 /* Container */
 .contact-container {
   max-width: 720px;
   margin: 0 auto;
-  text-align: center;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* ===============================
@@ -35,6 +34,7 @@
 ================================ */
 
 .contact-header {
+  text-align: center;
   margin-bottom: 64px;
 }
 
@@ -77,12 +77,14 @@
 ================================ */
 
 .contact-form {
-  text-align: left;
+  position: relative;
+  z-index: 2;
 }
 
 .form-grid {
   display: grid;
   gap: 24px;
+  grid-template-columns: 1fr;
 }
 
 @media (min-width: 768px) {
@@ -92,11 +94,11 @@
 }
 
 .form-group {
-  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group label {
-  display: block;
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -108,12 +110,21 @@
 .form-group select,
 .form-group textarea {
   width: 100%;
-  padding: 12px 16px;
+  padding: 14px 16px;
   background-color: transparent;
   border: 1px solid #262626;
   color: #f5f5f5;
   font-size: 14px;
-  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-group textarea {
+  resize: none;
+}
+
+/* FULL WIDTH MESSAGE */
+.full-width {
+  grid-column: 1 / -1;
 }
 
 .form-group input:focus,
@@ -123,17 +134,13 @@
   border-color: #c9a962;
 }
 
-.form-group textarea {
-  resize: none;
-}
-
 /* ===============================
    BUTTON
 ================================ */
 
 .form-actions {
   text-align: center;
-  margin-top: 16px;
+  margin-top: 40px;
 }
 
 .form-actions button {
@@ -145,7 +152,6 @@
   letter-spacing: 0.25em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .form-actions button:hover {
@@ -157,22 +163,29 @@
 ================================ */
 
 .contact-footer {
-  margin-top: 64px;
+  text-align: center;
+  margin-top: 72px;
   padding-top: 32px;
   border-top: 1px solid #1a1a1a;
 }
 
-.contact-email {
+.contact-email,
+.contact-phone {
   color: #a3a3a3;
   letter-spacing: 0.15em;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
+  font-size: 14px;
 }
 
-/* Social icons */
+/* ===============================
+   SOCIAL ICONS
+================================ */
+
 .contact-socials {
   display: flex;
   justify-content: center;
-  gap: 24px;
+  gap: 28px;
+  margin-top: 24px;
 }
 
 .contact-socials a {
@@ -184,17 +197,38 @@
   color: #c9a962;
 }
 
-/* Placeholder icons */
 .icon {
-  display: block;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   background-color: currentColor;
-  mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;
+  mask-size: contain;
 }
 
+/* Instagram */
 .icon.instagram {
-  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2.163c3.204 0 3.584.012 4.85.07...'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 5a5 5 0 100 10 5 5 0 000-10z'/%3E%3C/svg%3E");
+}
+
+/* Facebook */
+.icon.facebook {
+  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24'%3E%3Cpath d='M13 22v-9h3l1-4h-4V7c0-1 .5-2 2-2h2V1h-3c-4 0-5 3-5 6v2H6v4h3v9z'/%3E%3C/svg%3E");
+}
+
+/* WhatsApp */
+.icon.whatsapp {
+  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24'%3E%3Cpath d='M20 3.9A10 10 0 003.3 17L2 22l5-1.3A10 10 0 1020 3.9z'/%3E%3C/svg%3E");
+}
+
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.15);
 }

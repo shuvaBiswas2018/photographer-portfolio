@@ -1,4 +1,5 @@
 import "../styles/about.css";
+import aboutImg from "/images/shaajora_admin.jpg"; // adjust path if needed
 
 export default function About() {
   return (
@@ -17,20 +18,13 @@ export default function About() {
 
       {/* Main content */}
       <div className="about-container">
-        {/* Card */}
+        {/* Image card */}
         <div className="about-card">
-          <div className="about-card-icon">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#c9a962"
-              strokeWidth="0.4"
-            >
-              <circle cx="12" cy="8" r="5" />
-              <path d="M3 21c0-5 4-8 9-8s9 3 9 8" />
-            </svg>
-          </div>
-
+          <img
+            src={aboutImg}
+            alt="Photographer portrait"
+            className="about-image"
+          />
           <div className="about-card-frame" />
           <div className="about-card-glow" />
         </div>
@@ -40,29 +34,26 @@ export default function About() {
           <h2 className="about-title">The Story Behind the Lens</h2>
 
           <p className="about-text">
-            With over a decade of experience capturing life&apos;s most precious
-            moments, I believe every photograph tells a story waiting to be
-            discovered. My approach blends documentary authenticity with
-            artistic vision, creating images that resonate emotionally.
+            With over five years of hands-on experience, I specialize in
+            capturing authentic moments that feel natural, emotional, and
+            timeless. My photography style focuses on storytelling — preserving
+            real expressions, subtle details, and meaningful connections.
           </p>
 
           <p className="about-subtext">
-            Based in New York, available worldwide for creative collaborations
-            and commissions.
+            Every project is approached with patience, creativity, and a deep
+            respect for the story being told — whether it’s a portrait,
+            lifestyle shoot, or a special personal moment.
           </p>
 
           <div className="about-stats">
             <div>
-              <h3>500+</h3>
+              <h3>150+</h3>
               <span>Projects Completed</span>
             </div>
             <div>
-              <h3>12</h3>
+              <h3>5+</h3>
               <span>Years Experience</span>
-            </div>
-            <div>
-              <h3>30+</h3>
-              <span>Countries Visited</span>
             </div>
           </div>
         </div>

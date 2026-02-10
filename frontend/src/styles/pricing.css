@@ -14,7 +14,11 @@
   position: absolute;
   inset: 0;
   opacity: 0.05;
-  background-image: radial-gradient(circle at 2px 2px, #c9a962 1px, transparent 1px);
+  background-image: radial-gradient(
+    circle at 2px 2px,
+    #c9a962 1px,
+    transparent 1px
+  );
   background-size: 40px 40px;
   z-index: 0;
 }
@@ -68,6 +72,8 @@
 .pricing-header p {
   color: #737373;
   font-size: 18px;
+  max-width: 640px;
+  margin: 0 auto;
 }
 
 /* ===============================
@@ -140,10 +146,13 @@
   color: #c9a962;
 }
 
-.price-box span {
-  font-size: 11px;
-  letter-spacing: 0.2em;
+.price-note {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
   color: #737373;
+  margin-top: 6px;
 }
 
 /* Features */

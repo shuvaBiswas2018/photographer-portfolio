@@ -4,28 +4,28 @@ const pricingData = [
   {
     title: "Portrait Session",
     subtitle: "Personal & Professional",
-    price: "$450",
-    duration: "Starting",
+    price: "₹35,000",
+    duration: "90 Minutes",
     features: ["90-minute session", "30+ edited photos"],
   },
   {
     title: "Family Session",
     subtitle: "All Ages Welcome",
-    price: "$650",
+    price: "₹50,000",
     duration: "2 Hours",
     features: ["2-hour session", "50+ edited photos"],
   },
   {
     title: "Engagement",
     subtitle: "Couples Photography",
-    price: "$550",
+    price: "₹42,000",
     duration: "90 Minutes",
     features: ["90-minute session", "40+ edited photos"],
   },
   {
     title: "Wedding",
     subtitle: "Full Day Coverage",
-    price: "$3,200",
+    price: "₹50,000",
     duration: "8 Hours",
     features: ["8 hours coverage", "500+ edited photos"],
     featured: true,
@@ -33,28 +33,28 @@ const pricingData = [
   {
     title: "Maternity",
     subtitle: "Expecting Parents",
-    price: "$500",
+    price: "₹38,000",
     duration: "2 Hours",
     features: ["2-hour session", "35+ edited photos"],
   },
   {
     title: "Newborn",
     subtitle: "0–4 Weeks Old",
-    price: "$600",
+    price: "₹45,000",
     duration: "3 Hours",
     features: ["3-hour session", "40+ edited photos"],
   },
   {
     title: "Event",
     subtitle: "Corporate & Social",
-    price: "$850",
+    price: "₹65,000",
     duration: "4 Hours",
     features: ["4-hour coverage", "200+ edited photos"],
   },
   {
     title: "Real Estate",
     subtitle: "Property Photography",
-    price: "$400",
+    price: "₹30,000",
     duration: "Per Property",
     features: ["25+ edited photos", "HDR processing"],
   },
@@ -64,13 +64,6 @@ const pricingData = [
     price: "Custom",
     duration: "Per Project",
     features: ["Flexible duration", "Full licensing"],
-  },
-  {
-    title: "Headshots",
-    subtitle: "Professional Profile",
-    price: "$250",
-    duration: "30 Minutes",
-    features: ["30-minute session", "10+ edited photos"],
   },
 ];
 
@@ -88,8 +81,12 @@ export default function Pricing() {
             <span>Investment</span>
             <span />
           </div>
+
           <h2>Service Pricing</h2>
-          <p>Tailored packages to bring your vision to life</p>
+          <p>
+            Tailored packages to bring your vision to life.  
+            Prices shown are starting values and may vary based on requirements.
+          </p>
         </div>
 
         {/* Cards */}
@@ -97,8 +94,9 @@ export default function Pricing() {
           {pricingData.map((item, index) => (
             <div
               key={index}
-              className={`pricing-card-wrapper ${item.featured ? "featured" : ""
-                }`}
+              className={`pricing-card-wrapper ${
+                item.featured ? "featured" : ""
+              }`}
             >
               <div className="pricing-card">
                 {item.featured && <div className="badge">Popular</div>}
@@ -108,7 +106,14 @@ export default function Pricing() {
 
                 <div className="price-box">
                   <div className="price">{item.price}</div>
-                  <span>{item.duration}</span>
+                  {item.price !== "Custom" && (
+                    <span className="price-note">
+                      Starting from • {item.duration}
+                    </span>
+                  )}
+                  {item.price === "Custom" && (
+                    <span className="price-note">Custom Pricing</span>
+                  )}
                 </div>
 
                 <ul>
@@ -118,7 +123,7 @@ export default function Pricing() {
                 </ul>
 
                 <a href="#contact" className="pricing-btn">
-                  {item.price === "Custom" ? "Get Quote" : "Book Now"}
+                  {item.price === "Custom" ? "Get Quote" : "Enquire Now"}
                 </a>
               </div>
             </div>
@@ -128,9 +133,11 @@ export default function Pricing() {
         {/* Footer text */}
         <div className="pricing-footer">
           <p>
-            All packages include professional editing, color correction, and
-            high-resolution digital files. Travel fees may apply for locations
-            beyond 50 miles. Custom packages available upon request.
+            All prices mentioned are minimum starting investments and may vary
+            depending on shoot duration, location, deliverables, and
+            customization needs. Professional editing, color correction, and
+            high-resolution digital files are included. Custom packages are
+            available upon request.
           </p>
         </div>
       </div>
