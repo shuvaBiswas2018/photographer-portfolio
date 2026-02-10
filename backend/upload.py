@@ -1,64 +1,69 @@
-from fastapi import APIRouter, UploadFile, File
-from googleapiclient.http import MediaIoBaseUpload
-from datetime import datetime
-import io
+from fastapi import APIRouter, UploadFile, File, Form, HTTPException
+from typing import List
+import os
+import boto3
 
-from drive_service import drive
-from config import SESSIONS_PARENT_FOLDER_ID
+from s3_service import s3, BUCKET_NAME
+from session_db import get_session
+from crypto_service import decrypt_payload
+from image_utils import compress_image
 
-router = APIRouter(prefix="/api/session")
 
-def get_or_create_session_folder(session_token: str):
-    query = (
-        f"name='{session_token}' and "
-        f"mimeType='application/vnd.google-apps.folder' and "
-        f"'{SESSIONS_PARENT_FOLDER_ID}' in parents"
+router = APIRouter()
+
+
+@router.post("/api/upload/photos")
+async def upload_photos(
+    shortId: str = Form(...),
+    files: List[UploadFile] = File(...)
+):
+    # 🔍 Resolve session
+    encrypted = get_session(shortId)
+
+    if not encrypted:
+        raise HTTPException(status_code=404, detail="Invalid session")
+
+    session_data = decrypt_payload(encrypted)
+
+    base_folder = (
+        f"{session_data['clientName'].lower().replace(' ', '-')}_{session_data['date']}/"
+        f"{session_data['eventType'].lower()}/"
+        f"{session_data['sessionToken']}"
     )
 
-    results = drive.files().list(q=query, fields="files(id)").execute()
-    files = results.get("files", [])
+    uploaded_files = []
 
-    if files:
-        return files[0]["id"]
+    for file in files:
+        compressed_image = compress_image(file.file)
 
-    folder_metadata = {
-        "name": session_token,
-        "mimeType": "application/vnd.google-apps.folder",
-        "parents": [SESSIONS_PARENT_FOLDER_ID]
-    }
+        # filename = file.filename.rsplit(".", 1)[0] + ".jpg"
 
-    folder = drive.files().create(
-        body=folder_metadata,
-        fields="id"
-    ).execute()
+        file_key = f"{base_folder}/{file.filename}"
 
-    return folder["id"]
+        s3.upload_fileobj(
+            compressed_image,
+            BUCKET_NAME,
+            file_key,
+            ExtraArgs={
+                "ContentType": file.content_type
+            }
+        )
 
-@router.post("/{session_token}/upload")
-async def upload_image(session_token: str, file: UploadFile = File(...)):
-    session_folder_id = get_or_create_session_folder(session_token)
+        uploaded_files.append(file.filename)
 
-    timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
-    filename = f"{timestamp}_{file.filename}"
+    # for file in files:
+    #     file_key = f"{base_folder}/{file.filename}"
 
-    media = MediaIoBaseUpload(
-        io.BytesIO(await file.read()),
-        mimetype=file.content_type,
-        resumable=True
-    )
+    #     s3.upload_fileobj(
+    #         file.file,
+    #         BUCKET_NAME,
+    #         file_key,
+    #         ExtraArgs={"ContentType": file.content_type}
+    #     )
 
-    file_metadata = {
-        "name": filename,
-        "parents": [session_folder_id]
-    }
-
-    uploaded = drive.files().create(
-        body=file_metadata,
-        media_body=media,
-        fields="id, name"
-    ).execute()
+    #     uploaded_files.append(file.filename)
 
     return {
-        "status": "uploaded",
-        "filename": uploaded["name"]
+        "status": "success",
+        "uploaded": uploaded_files
     }

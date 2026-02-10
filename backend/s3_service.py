@@ -1,5 +1,9 @@
 import boto3
 import os
+from dotenv import load_dotenv
+
+# 🔥 LOAD .env FILE
+load_dotenv()
 
 aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID")
 aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY")
@@ -18,7 +22,7 @@ s3 = boto3.client(
     region_name=os.getenv("AWS_REGION")
 )
 
-BUCKET_NAME = os.getenv("AWS_S3_BUCKET")
+BUCKET_NAME = os.getenv("AWS_S3_BUCKET_NAME")
 
 
 def create_s3_folder(folder_path: str):
