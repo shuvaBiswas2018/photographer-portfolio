@@ -1,24 +1,42 @@
-# Logs
-logs
-*.log
+# Frontend (.gitignore) for Create React App
+
+# Node modules
+/node_modules/
+
+# Build output
+/build/
+build/
+
+# Local environment files (keep .env.example in repo if you have one)
+.env*
+.env.local
+.env.production
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
+*.log
 
-node_modules
-dist
-dist-ssr
-*.local
+# Test / coverage
+/coverage/
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# Cache
+.cache/
+.parcel-cache/
+
+# Editor directories and OS files
+.vscode/
+.idea/
+*.sublime-workspace
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+
+# Misc
+dist/
+.storybook/
+storybook-static/
